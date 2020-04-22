@@ -5,7 +5,7 @@ import {
   View,
   KeyboardAvoidingView,
   Picker,
-  TouchableOpacity,
+  TextInput,
 } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
 
@@ -15,21 +15,22 @@ type ModalProps = {
   type: "income" | "expense" | "savings";
 };
 
-export const amountInput = (props: ModalProps) => {
+export const AmountInput = (props: ModalProps) => {
   const Theme: Color = getTheme(props.type);
-  const formLabel = [Typography.h3, Typography.dark, Typography.smallMargin];
+  const formLabel = [Typography.h3, Typography.dark, Typography.smallMarginV];
   const formInput = [
     styles.inputContainer,
     Typography.h2,
     Typography.centerText,
     { color: Theme.darkTheme },
+    Typography.extraPadding,
   ];
   const [amount, setAmount] = useState("");
 
   return (
-    <View>
+    <View style={Typography.centerContent}>
       {/* todo: implement typeahead, limit max characters */}
-      <Text style={formLabel}>Reason</Text>
+      <Text style={formLabel}>Amount</Text>
       <TextInputMask
         style={formInput}
         placeholder="$100.00"
@@ -53,14 +54,15 @@ export const amountInput = (props: ModalProps) => {
   );
 };
 
-export const dateInput = (props: ModalProps) => {
+export const DateInput = (props: ModalProps) => {
   const Theme: Color = getTheme(props.type);
-  const formLabel = [Typography.h3, Typography.dark, Typography.smallMargin];
+  const formLabel = [Typography.h3, Typography.dark, Typography.smallMarginV];
   const formInput = [
     styles.inputContainer,
     Typography.h2,
     Typography.centerText,
     { color: Theme.darkTheme },
+    Typography.extraPadding,
   ];
   const [date, setDate] = useState("");
 
@@ -89,9 +91,9 @@ export const dateInput = (props: ModalProps) => {
   );
 };
 
-export const FormInput = (props: ModalProps) => {
+export const PickerInput = (props: ModalProps) => {
   const Theme: Color = getTheme(props.type);
-  const formLabel = [Typography.h3, Typography.dark, Typography.smallMargin];
+  const formLabel = [Typography.h3, Typography.dark, Typography.smallMarginV];
   const formInput = [
     styles.inputContainer,
     Typography.h2,
@@ -101,40 +103,49 @@ export const FormInput = (props: ModalProps) => {
   const [selectedValue, setSelectedValue] = useState("Daily");
 
   return (
-    <KeyboardAvoidingView>
-      <KeyboardAvoidingView style={Typography.centerContent}>
-        <Text style={formLabel}>Repeat</Text>
-        <Picker
-          selectedValue={selectedValue}
-          itemStyle={[formInput, styles.pickerStyles]}
-          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-        >
-          <Picker.Item label="Daily" value="Daily" />
-          <Picker.Item label="Weekly" value="Weekly" />
-          <Picker.Item label="Every 2 Weeks" value="2 Weeks" />
-          <Picker.Item label="Monthly" value="Monthly" />
-        </Picker>
-      </KeyboardAvoidingView>
+    <KeyboardAvoidingView style={Typography.centerContent}>
+      <Text style={formLabel}>Repeat</Text>
+      <Picker
+        selectedValue={selectedValue}
+        itemStyle={[formInput, styles.pickerStyles]}
+        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+      >
+        <Picker.Item label="Daily" value="Daily" />
+        <Picker.Item label="Weekly" value="Weekly" />
+        <Picker.Item label="Every 2 Weeks" value="2 Weeks" />
+        <Picker.Item label="Monthly" value="Monthly" />
+      </Picker>
     </KeyboardAvoidingView>
   );
 };
 
 export const TypeaheadInput = (props: ModalProps) => {
   const Theme: Color = getTheme(props.type);
-  const formLabel = [Typography.h3, Typography.dark, Typography.smallMargin];
+  const formLabel = [Typography.h3, Typography.dark, Typography.smallMarginV];
   const formInput = [
     styles.inputContainer,
     Typography.h2,
     Typography.centerText,
     { color: Theme.darkTheme },
+    Typography.extraPadding,
   ];
-  const [reason, setReason] = useState("Daily");
+
+  const [reason, setReason] = useState("");
 
   return (
-    <KeyboardAvoidingView>
-      <KeyboardAvoidingView style={Typography.centerContent}>
-        <Text style={formLabel}>Reason</Text>
-      </KeyboardAvoidingView>
+    <KeyboardAvoidingView style={Typography.centerContent}>
+      <Text style={formLabel}>Reason</Text>
+      <TextInput
+        style={formInput}
+        returnKeyType="done"
+        placeholder={props.type == "expense" ? "Postmates" : "Work Bonus"}
+        placeholderTextColor={Theme.lightTheme}
+        // dont forget to set the "value" and "onChangeText" props
+        value={reason}
+        onChangeText={(text) => {
+          setReason(text);
+        }}
+      />
     </KeyboardAvoidingView>
   );
 };
@@ -152,7 +163,6 @@ const styles = StyleSheet.create({
   inputContainer: {
     borderRadius: 20,
     backgroundColor: "#fff",
-    padding: 20,
     width: 250,
   },
   cornerIcon: {
@@ -161,6 +171,6 @@ const styles = StyleSheet.create({
     top: 25,
   },
   pickerStyles: {
-    maxHeight: 150,
+    maxHeight: 125,
   },
 });

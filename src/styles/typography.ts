@@ -49,8 +49,14 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  smallMargin: {
+  smallMarginV: {
     marginVertical: 10,
+  },
+  smallMarginH: {
+    marginHorizontal: 10,
+  },
+  extraPadding: {
+    padding: 20,
   },
   centerText: {
     textAlign: "center",
