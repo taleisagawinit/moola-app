@@ -3,19 +3,19 @@ import {
   StyleSheet,
   Text,
   View,
-  KeyboardAvoidingView,
   Picker,
+  Switch,
   TextInput,
 } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
 
 import { Color, getTheme } from "../styles/colors";
 import { styles as Typography } from "../styles/typography";
-type ModalProps = {
+type FormInputProps = {
   type: "income" | "expense" | "savings";
 };
 
-export const AmountInput = (props: ModalProps) => {
+export const AmountInput = (props: FormInputProps) => {
   const Theme: Color = getTheme(props.type);
   const formLabel = [Typography.h3, Typography.dark, Typography.smallMarginV];
   const formInput = [
@@ -54,7 +54,7 @@ export const AmountInput = (props: ModalProps) => {
   );
 };
 
-export const DateInput = (props: ModalProps) => {
+export const DateInput = (props: FormInputProps) => {
   const Theme: Color = getTheme(props.type);
   const formLabel = [Typography.h3, Typography.dark, Typography.smallMarginV];
   const formInput = [
@@ -91,7 +91,7 @@ export const DateInput = (props: ModalProps) => {
   );
 };
 
-export const PickerInput = (props: ModalProps) => {
+export const PickerInput = (props: FormInputProps) => {
   const Theme: Color = getTheme(props.type);
   const formLabel = [Typography.h3, Typography.dark, Typography.smallMarginV];
   const formInput = [
@@ -101,25 +101,46 @@ export const PickerInput = (props: ModalProps) => {
     { color: Theme.darkTheme },
   ];
   const [selectedValue, setSelectedValue] = useState("Daily");
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled((previousState) => !previousState);
 
   return (
-    <KeyboardAvoidingView style={Typography.centerContent}>
-      <Text style={formLabel}>Repeat</Text>
-      <Picker
-        selectedValue={selectedValue}
-        itemStyle={[formInput, styles.pickerStyles]}
-        onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-      >
-        <Picker.Item label="Daily" value="Daily" />
-        <Picker.Item label="Weekly" value="Weekly" />
-        <Picker.Item label="Every 2 Weeks" value="2 Weeks" />
-        <Picker.Item label="Monthly" value="Monthly" />
-      </Picker>
-    </KeyboardAvoidingView>
+    <View style={Typography.centerContent}>
+      <View style={Typography.centerContentRow}>
+        <Text style={formLabel}>Repeat</Text>
+        <Switch
+          trackColor={{ false: Theme.lightTheme, true: "#fff" }}
+          thumbColor={Theme.darkTheme}
+          // ios_backgroundColor="#3e3e3e"
+          onValueChange={toggleSwitch}
+          value={isEnabled}
+          style={[
+            styles.switchStyle,
+            Typography.smallMarginH,
+            {
+              borderColor: Theme.darkTheme,
+            },
+          ]}
+        />
+      </View>
+
+      {isEnabled ? (
+        <Picker
+          selectedValue={selectedValue}
+          itemStyle={[formInput, styles.pickerStyles]}
+          onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+        >
+          <Picker.Item label="Daily" value="Daily" />
+          <Picker.Item label="Weekly" value="Weekly" />
+          <Picker.Item label="Every 2 Weeks" value="2 Weeks" />
+          <Picker.Item label="Monthly" value="Monthly" />
+        </Picker>
+      ) : null}
+    </View>
   );
 };
 
-export const TypeaheadInput = (props: ModalProps) => {
+export const TypeaheadInput = (props: FormInputProps) => {
   const Theme: Color = getTheme(props.type);
   const formLabel = [Typography.h3, Typography.dark, Typography.smallMarginV];
   const formInput = [
@@ -133,7 +154,7 @@ export const TypeaheadInput = (props: ModalProps) => {
   const [reason, setReason] = useState("");
 
   return (
-    <KeyboardAvoidingView style={Typography.centerContent}>
+    <View style={Typography.centerContent}>
       <Text style={formLabel}>Reason</Text>
       <TextInput
         style={formInput}
@@ -146,7 +167,7 @@ export const TypeaheadInput = (props: ModalProps) => {
           setReason(text);
         }}
       />
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
@@ -164,6 +185,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     backgroundColor: "#fff",
     width: 250,
+    marginBottom: 10,
   },
   cornerIcon: {
     position: "absolute",
@@ -173,4 +195,5 @@ const styles = StyleSheet.create({
   pickerStyles: {
     maxHeight: 125,
   },
+  switchStyle: { borderWidth: 3, borderRadius: 15 },
 });

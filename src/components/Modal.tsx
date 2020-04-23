@@ -1,6 +1,15 @@
 import { AntDesign } from "@expo/vector-icons";
-import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  Switch,
+} from "react-native";
 
 import { Transaction } from "../../moolaTypes";
 import { Color, getTheme } from "../styles/colors";
@@ -33,28 +42,25 @@ export const Modal = (props: ModalProps) => {
           color={Theme.darkTheme}
         />
       </TouchableOpacity>
+      <KeyboardAvoidingView behavior="padding">
+        <AmountInput type={props.type} />
+        <TypeaheadInput type={props.type} />
+        <PickerInput type={props.type} />
 
-      <View
-        style={[Typography.roundedContainer, { borderColor: Theme.darkTheme }]}
-      >
-        <Text
+        <TouchableOpacity
           style={[
-            Typography.h2,
-            { color: Theme.darkTheme },
-            Typography.capitalize,
+            styles.buttonContainer,
+            Typography.roundedContainer,
+            { borderColor: Theme.darkTheme },
           ]}
         >
-          {isNewItem ? "Edit " + props.type : "Add " + props.type}
-        </Text>
-      </View>
-      <AmountInput type={props.type} />
-      <TypeaheadInput type={props.type} />
-      <PickerInput type={props.type} />
-      <TouchableOpacity style={[styles.buttonContainer]}>
-        {/* todo: implement typeahead, limit max characters */}
-        <Text style={doneStyle}>Done</Text>
-        <AntDesign name="checkcircle" size={32} color={Theme.darkTheme} />
-      </TouchableOpacity>
+          {/* todo: implement typeahead, limit max characters */}
+          <Text style={doneStyle}>
+            {isNewItem ? "Edit " + props.type : "Add " + props.type}
+          </Text>
+          <AntDesign name="checkcircle" size={32} color={Theme.darkTheme} />
+        </TouchableOpacity>
+      </KeyboardAvoidingView>
     </View>
   );
 };
@@ -66,7 +72,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "space-around",
     position: "absolute",
     bottom: 0,
     padding: 25,
@@ -80,7 +86,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    width: "100%",
+    // width: "80%",
     paddingVertical: 20,
+    marginVertical: 20,
   },
 });

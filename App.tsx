@@ -1,15 +1,12 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 
 import { Modal } from "./src/components/Modal";
+import Sidebar from "./src/navigation/Sidebar";
 import { appColor } from "./src/styles/colors";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Modal type="expense" />
-    </View>
-  );
+  return <Modal type="income" />;
 }
 
 const styles = StyleSheet.create({
