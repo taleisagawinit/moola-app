@@ -32,17 +32,17 @@ export const Modal = (props: ModalProps) => {
           isNewItem={isNewItem}
           onPress={() => setModalVisible(!modalVisible)}
         />
-        <KeyboardAvoidingView behavior="padding">
-          <FormInput title="amount" type="money" themeType={props.type} />
-          <FormInput title="reason" type="typeahead" themeType={props.type} />
-          <FormInput title="repeat" type="picker" themeType={props.type} />
+        {/* <KeyboardAvoidingView behavior="padding"> */}
+        <FormInput title="amount" type="money" themeType={props.type} />
+        <FormInput title="reason" type="typeahead" themeType={props.type} />
+        <FormInput title="repeat" type="picker" themeType={props.type} />
 
-          <Button
-            themeType={props.type}
-            type="submitButton"
-            isNewItem={isNewItem}
-          />
-        </KeyboardAvoidingView>
+        <Button
+          themeType={props.type}
+          type="submitButton"
+          isNewItem={isNewItem}
+        />
+        {/* </KeyboardAvoidingView> */}
       </View>
     </MyModalContainer>
   );
@@ -53,9 +53,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     width: "100%",
     borderRadius: 40,
+    height: "80%",
+    // flex: 1,
     flexDirection: "column",
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "flex-start",
     position: "absolute",
     bottom: 0,
     padding: 25,

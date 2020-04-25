@@ -84,11 +84,11 @@ export default function Button(props: ButtonProps) {
 const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: "row",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
     // width: "80%",
     paddingVertical: 20,
-    marginVertical: 20,
+    marginTop: 10,
   },
   cornerIcon: {
     position: "absolute",

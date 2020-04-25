@@ -126,7 +126,7 @@ export default function FormInput(props: FormInputProps) {
     case "picker":
       return (
         <View style={[Typography.centerContent]}>
-          <View style={Typography.centerContentRow}>
+          <View style={[Typography.centerContentRow]}>
             <Text style={formLabel}>{props.title}</Text>
             <Switch
               trackColor={{ false: Theme.lightTheme, true: "#fff" }}
