@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  View,
-  KeyboardAvoidingView,
-  Modal as MyModalContainer,
-} from "react-native";
+import { StyleSheet, View, Modal as MyModalContainer } from "react-native";
 
 import { Transaction } from "../../moolaTypes";
 import { Color, getTheme } from "../styles/colors";

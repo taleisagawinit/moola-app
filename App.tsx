@@ -1,11 +1,17 @@
 import React from "react";
 import { StyleSheet } from "react-native";
+import { Provider } from "react-redux";
 
-import { Modal } from "./src/components/Modal";
+import store from "./src/redux/store";
+import IncomeScreen from "./src/screens/auth-screens/Income";
 import { appColor } from "./src/styles/colors";
 
 export default function App() {
-  return <Modal type="income" />;
+  return (
+    <Provider store={store}>
+      <IncomeScreen />
+    </Provider>
+  );
 }
 
 const styles = StyleSheet.create({
