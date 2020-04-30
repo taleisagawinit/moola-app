@@ -54,6 +54,13 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  screenContainer: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "center",
+    padding: 25,
+  },
   smallMarginV: {
     marginVertical: 10,
   },

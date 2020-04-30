@@ -1,8 +1,8 @@
 const initialState = {
   income: [],
   expenses: [],
-  currentTheme: "",
-  itemTheme: "",
+  appTheme: "income",
+  itemTheme: "income",
 };
 
 type ActionType = {

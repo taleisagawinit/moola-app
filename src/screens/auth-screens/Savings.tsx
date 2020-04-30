@@ -1,10 +1,17 @@
 import * as React from "react";
-import { View, Text } from "react-native";
+import { Text, ScrollView } from "react-native";
+
+import Modal from "../../components/Modal";
+import { appColor, savingsColor } from "../../styles/colors";
+import { styles as Typography } from "../../styles/typography";
 
 export default function SavingsScreen(props: any) {
   return (
-    <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-      <Text>Savings Screen</Text>
-    </View>
+    <ScrollView contentContainerStyle={Typography.screenContainer}>
+      <Text style={[Typography.h1, { color: appColor.darkTheme }]}>
+        Your Savings
+      </Text>
+      <Modal type="savings" />
+    </ScrollView>
   );
 }

@@ -11,7 +11,7 @@ type ModalProps = {
   item?: Transaction;
 };
 
-export const Modal = (props: ModalProps) => {
+export default function Modal(props: ModalProps) {
   const Theme: Color = getTheme(props.type);
   const isNewItem: boolean = !!props.item;
   const [modalVisible, setModalVisible] = useState(true);
@@ -41,7 +41,7 @@ export const Modal = (props: ModalProps) => {
       </View>
     </MyModalContainer>
   );
-};
+}
 
 const styles = StyleSheet.create({
   modalContainer: {

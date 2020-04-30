@@ -1,4 +1,4 @@
-import { createDrawerNavigator, DrawerItem } from "@react-navigation/drawer";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { NavigationContainer } from "@react-navigation/native";
 import * as React from "react";
 
@@ -12,11 +12,12 @@ import { styles as Typography } from "../styles/typography";
 
 const Drawer = createDrawerNavigator();
 
-export default function Sidebar(props: string) {
+export default function Sidebar() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
         initialRouteName="Budget"
+        screenOptions={{}}
         drawerStyle={{
           borderRadius: 40,
           // flexDirection: "column",
