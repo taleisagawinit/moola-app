@@ -16,6 +16,7 @@ type ButtonProps = {
   type: "submitButton" | "toggle" | "cornerIcon";
   isNewItem: boolean;
   onPress?: any;
+  onSubmit?: any;
 };
 
 export default function Button(props: ButtonProps) {
@@ -35,6 +36,7 @@ export default function Button(props: ButtonProps) {
     case "submitButton":
       return (
         <TouchableOpacity
+          onPress={props.onSubmit}
           style={[
             styles.buttonContainer,
             Typography.roundedContainer,

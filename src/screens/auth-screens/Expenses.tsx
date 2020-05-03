@@ -1,17 +1,141 @@
 import * as React from "react";
-import { Text, ScrollView } from "react-native";
+import { Text, ScrollView, View, StyleSheet } from "react-native";
 
-import Modal from "../../components/Modal";
+import { RecurringTile, AddNewTile, HistoryTile } from "../../components/Tiles";
 import { appColor, expenseColor } from "../../styles/colors";
 import { styles as Typography } from "../../styles/typography";
 
-export default function ExpensesScreen(props: any) {
+export default function ExpenseSreen(props: any) {
   return (
-    <ScrollView contentContainerStyle={Typography.screenContainer}>
-      <Text style={[Typography.h1, { color: appColor.darkTheme }]}>
-        Your Expenses
-      </Text>
-      <Modal type="expense" />
+    <ScrollView contentContainerStyle={[Typography.screenContainer]}>
+      <View>
+        <Text
+          style={[Typography.h1, { color: appColor.darkTheme }, styles.title]}
+        >
+          Your Income
+        </Text>
+        <View style={styles.highlight} />
+      </View>
+      {/* statement highlight */}
+      <View style={styles.statementContainer}>
+        <Text style={[Typography.h2, { color: appColor.darkTheme }]}>
+          You currently have
+        </Text>
+        <View style={styles.highlightContainer}>
+          <View style={styles.statementHighlight}>
+            <Text style={[Typography.h2, { color: expenseColor.darkTheme }]}>
+              $1,300.0
+            </Text>
+          </View>
+          <Text style={[Typography.h2, { color: appColor.darkTheme }]}>
+            of regular
+          </Text>
+        </View>
+        <Text style={[Typography.h2, { color: appColor.darkTheme }]}>
+          income per month
+        </Text>
+      </View>
+      <View>
+        <Text style={[Typography.h3, { color: appColor.darkTheme }]}>
+          Recurring Expenses
+        </Text>
+        <View style={[Typography.largeMarginV, { height: 200 }]}>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            // style={{ height: 500 }}
+          >
+            <RecurringTile id={1} amount={10} name="Spotify" type="expense" />
+            <RecurringTile
+              id={2}
+              amount={11.99}
+              name="Netflix"
+              type="expense"
+            />
+            <RecurringTile id={3} amount={1100} name="Rent" type="expense" />
+            <AddNewTile />
+          </ScrollView>
+        </View>
+      </View>
+      <View>
+        <Text
+          style={[
+            Typography.h3,
+            { color: appColor.darkTheme, marginBottom: 25 },
+          ]}
+        >
+          History
+        </Text>
+        <View>
+          <HistoryTile
+            id={1}
+            amount={52}
+            name="Groceries"
+            type="expense"
+            date="5/2/20"
+          />
+          <HistoryTile
+            id={2}
+            amount={25}
+            name="Postmates"
+            type="expense"
+            date="5/1/20"
+          />
+          <HistoryTile
+            id={3}
+            amount={1100}
+            name="Rent"
+            type="expense"
+            date="5/1/20"
+          />
+        </View>
+      </View>
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  title: {
+    zIndex: 100,
+  },
+  highlight: {
+    width: 100,
+    backgroundColor: expenseColor.lightTheme,
+    height: 20,
+    transform: [{ skewX: "-20deg" }],
+    position: "absolute",
+    right: 10,
+    bottom: -5,
+  },
+  statementHighlight: {
+    borderWidth: 3,
+    borderColor: expenseColor.darkTheme,
+    padding: 10,
+    marginRight: 5,
+    marginVertical: 5,
+    borderRadius: 30,
+  },
+  highlightContainer: {
+    flexDirection: "row",
+    alignContent: "center",
+    alignItems: "center",
+  },
+  item: {
+    backgroundColor: expenseColor.lightTheme,
+    width: 125,
+    height: 150,
+    marginVertical: 8,
+    marginRight: 15,
+    borderRadius: 15,
+    justifyContent: "center",
+    alignContent: "center",
+    alignItems: "center",
+    // marginHorizontal: 16,
+  },
+  scrollViewContainer: {
+    marginTop: 50,
+  },
+  statementContainer: {
+    marginVertical: 50,
+  },
+});

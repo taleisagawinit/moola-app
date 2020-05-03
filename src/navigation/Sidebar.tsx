@@ -16,7 +16,7 @@ export default function Sidebar() {
   return (
     <NavigationContainer>
       <Drawer.Navigator
-        initialRouteName="Budget"
+        initialRouteName="Income"
         screenOptions={{}}
         drawerStyle={{
           borderRadius: 40,

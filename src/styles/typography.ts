@@ -55,14 +55,20 @@ export const styles = StyleSheet.create({
     alignItems: "center",
   },
   screenContainer: {
-    flex: 1,
+    // flex: 1,
     flexDirection: "column",
     alignItems: "flex-start",
-    justifyContent: "center",
-    padding: 25,
+    // justifyContent: "center",
+    paddingHorizontal: 25,
+    paddingVertical: 50,
+    backgroundColor: appColor.lightTheme,
+    // alignSelf: "center",
   },
   smallMarginV: {
     marginVertical: 10,
+  },
+  largeMarginV: {
+    marginVertical: 25,
   },
   smallMarginH: {
     marginHorizontal: 10,

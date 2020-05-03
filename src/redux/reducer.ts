@@ -1,6 +1,7 @@
 const initialState = {
   income: [],
   expenses: [],
+  savings: [],
   appTheme: "income",
   itemTheme: "income",
 };
@@ -12,8 +13,12 @@ type ActionType = {
 
 export default function (state = initialState, action: ActionType) {
   switch (action.type) {
-    //   case 'GET_FIRSTS':
-    //       return {...state, firsts: [...state.firsts, action.payload]}
+    case "ADD_INCOME":
+      return { ...state, income: [...state.income, action.payload] };
+    case "ADD_EXPENSE":
+      return { ...state, income: [...state.expenses, action.payload] };
+    case "ADD_SAVINGS":
+      return { ...state, income: [...state.savings, action.payload] };
 
     default:
       return state;

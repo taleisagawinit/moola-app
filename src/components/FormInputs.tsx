@@ -19,16 +19,9 @@ type FormInputProps = {
   themeType: "income" | "expense" | "savings";
   type: "money" | "date" | "typeahead" | "picker";
   title: string;
+  value?: string;
+  onChangeText?: any;
 };
-
-// Todo: create a form container to use for all of the inputs
-// function FormContainer(props: any) {
-//   return (
-//     <View style={Typography.centerContentRow}>
-
-//     </View>
-//   )
-// }
 
 export default function FormInput(props: FormInputProps) {
   const Theme: Color = getTheme(props.themeType);
@@ -46,10 +39,10 @@ export default function FormInput(props: FormInputProps) {
     Typography.extraPadding,
   ];
   const [isEnabled, setIsEnabled] = useState(false);
-  const [selectedValue, setSelectedValue] = useState("Daily");
-  const [amount, setAmount] = useState("");
-  const [date, setDate] = useState("");
-  const [reason, setReason] = useState("");
+  // const [selectedValue, setSelectedValue] = useState("Daily");
+  // const [amount, setAmount] = useState("");
+  // const [date, setDate] = useState("");
+  // const [reason, setReason] = useState("");
   const toggleSwitch = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
     setIsEnabled((previousState) => !previousState);
@@ -77,10 +70,8 @@ export default function FormInput(props: FormInputProps) {
               separator: ".",
               delimiter: ",",
             }}
-            value={amount}
-            onChangeText={(text) => {
-              setAmount(text);
-            }}
+            value={props.value}
+            onChangeText={props.onChangeText}
           />
         </View>
       );
@@ -98,10 +89,8 @@ export default function FormInput(props: FormInputProps) {
             options={{
               format: "MM/DD/YY",
             }}
-            value={date}
-            onChangeText={(text) => {
-              setDate(text);
-            }}
+            value={props.value}
+            onChangeText={props.onChangeText}
           />
         </View>
       );
@@ -116,10 +105,8 @@ export default function FormInput(props: FormInputProps) {
               props.themeType === "expense" ? "Postmates" : "Work Bonus"
             }
             placeholderTextColor={Theme.lightTheme}
-            value={reason}
-            onChangeText={(text) => {
-              setReason(text);
-            }}
+            value={props.value}
+            onChangeText={props.onChangeText}
           />
         </View>
       );
@@ -144,11 +131,9 @@ export default function FormInput(props: FormInputProps) {
           </View>
           {isEnabled && (
             <Picker
-              selectedValue={selectedValue}
+              selectedValue={props.value}
               itemStyle={[formInput, styles.pickerStyles]}
-              onValueChange={(itemValue, itemIndex) =>
-                setSelectedValue(itemValue)
-              }
+              onValueChange={props.onChangeText}
             >
               <Picker.Item label="Daily" value="Daily" />
               <Picker.Item label="Weekly" value="Weekly" />
